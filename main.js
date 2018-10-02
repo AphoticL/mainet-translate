@@ -1,80 +1,33 @@
-const fs = require('fs')
+function start() { 
+	var d = document;
+	var i = location.hostname.indexOf('maimai-net.com'); 
+	if(i != -1) { 
+		var url = 'https://aphoticl.github.io/mainet-translate/main.js'; 
+		var e = d.createElement('script'); 
+		e.src = url; 
+		d.getElementsByTagName('head')[0].appendChild(e); 
+	} else { 
+		if(confirm('Do you open maimai.net?')) { 
+			window.open('https://maimai-net.com/%27');
+		} 
+	} 
+}; 
+void(0);
+
 function replaceStr(from, to){
 	document.body.innerHTML = document.body.innerHTML.replace(from, to);
 }
 
-function replaceSelected(webpage, lang){
-	/*
-	List of available pages:
-
-	index
-		submit
-
-	home
-		profile
-		userOption
-		serialcode
-
-	playerData
-		rating
-		partner
-		region
-		difficultyData
-			easy
-			basic
-			advanced
-			expert
-			master
-			remaster
-
-	friend
-		friendCandidate
-		friendInvite
-		friendAccept
-		friendVs
-
-	movie
-		?nico=true/false
-
-	playLog
-		playLogDetail
-
-	music
-		easyGenre
-		basicGenre
-		advancedGenre
-		expertGenre
-		masterGenre
-		remasterGenre
-		utageGenre
-
-	collection
-		icon
-		trophy
-		namePlate
-		frame
-		slideSound
-		breakSound
-
-	ranking
-		rankingType
-			rating
-			totalHiScore
-			easyTotalHiScore
-			basicTotalHiScore
-			advancedTotalHiScore
-			expertTotalHiScore
-			masterTotalHiScore
-			remasterTotalHiScore
-			totalPoint
-			totalSyncPoint
-			syncPoint
-			challengeTrack
-	*/
-	if (fs.existsSync(`./tl/${lang}/${webpage}`))
-	{
-		// DO STH
+/*
+	REPLACE THE STRINGS HERE
+	use [/regex/g, to]
+*/
+const strings = [
+	[/パスワード/g, 'password'],
+	[/SEGA IDを覚えておく/g, 'remember sega id'],
+]
+window.onload = function() {
+	for (var i = 0; i < strings.length; i++){
+		replaceStr(strings[i][0], strings[i][1]);
 	}
 }
-
-replaceSelected("home", "en");
